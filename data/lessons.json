@@ -1,0 +1,320 @@
+[
+  {
+    "lesson_id": "ch1",
+    "chapter": 1,
+    "title": "What is a Qubit?",
+    "explanation": "A normal computer uses bits: 0 or 1. A qubit is the basic unit of a quantum computer and can behave differently from an ordinary bit.",
+    "challenges": [
+      {
+        "challenge_id": "ch1-q1",
+        "type": "multiple_choice",
+        "difficulty": "easy",
+        "prompt": "Which one is the basic unit of a quantum computer?",
+        "options": ["Bit", "Qubit", "Byte", "Pixel"],
+        "grading_method": "answer",
+        "expected_answer": "Qubit",
+        "xp_reward": 20
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch2",
+    "chapter": 2,
+    "title": "Measuring a Qubit",
+    "explanation": "Measuring a qubit gives a result we can observe. If we run the same experiment many times, the results settle into a probability pattern.",
+    "challenges": [
+      {
+        "challenge_id": "ch2-q1",
+        "type": "prediction",
+        "difficulty": "easy",
+        "prompt": "A qubit starts at |0⟩ and no gates are applied. What will you see when you measure it?",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [{ "states": ["0"], "min_sum": 0.95 }]
+        },
+        "xp_reward": 10
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch3",
+    "chapter": 3,
+    "title": "The X Gate — Flipping a Qubit",
+    "explanation": "The X gate flips a qubit. It changes 0 into 1 and 1 into 0.",
+    "challenges": [
+      {
+        "challenge_id": "ch3-q1",
+        "type": "circuit_building",
+        "difficulty": "easy",
+        "prompt": "Turn |0⟩ into |1⟩.",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [{ "states": ["1"], "min_sum": 0.95 }]
+        },
+        "xp_reward": 20
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch4",
+    "chapter": 4,
+    "title": "Superposition — Being in Two States at Once",
+    "explanation": "The H gate creates superposition: roughly equal chances of measuring 0 or 1.",
+    "challenges": [
+      {
+        "challenge_id": "ch4-q1",
+        "type": "circuit_building",
+        "difficulty": "medium",
+        "prompt": "Create a 50/50 quantum state from |0⟩.",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [
+            { "states": ["0"], "min_sum": 0.4 },
+            { "states": ["1"], "min_sum": 0.4 }
+          ]
+        },
+        "xp_reward": 40
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch5",
+    "chapter": 5,
+    "title": "Playing with Superposition",
+    "explanation": "Applying H twice in a row cancels out — you end up back where you started, not in superposition.",
+    "challenges": [
+      {
+        "challenge_id": "ch5-q1",
+        "type": "prediction",
+        "difficulty": "medium",
+        "prompt": "Apply H, then H again, to |0⟩. What will you measure?",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [{ "states": ["0"], "min_sum": 0.95 }]
+        },
+        "xp_reward": 30
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch6",
+    "chapter": 6,
+    "title": "The Z Gate — The Invisible Flip",
+    "explanation": "Z changes phase, not the 0/1 value directly — but combined with H, that hidden phase change becomes visible in the final measurement.",
+    "challenges": [
+      {
+        "challenge_id": "ch6-q1",
+        "type": "prediction",
+        "difficulty": "medium",
+        "prompt": "Apply H, then Z, then H to |0⟩. What will you measure?",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [{ "states": ["1"], "min_sum": 0.95 }]
+        },
+        "xp_reward": 40
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch7",
+    "chapter": 7,
+    "title": "Combining Gates on One Qubit",
+    "explanation": "Gate order matters. Fix this broken circuit so it correctly creates a 50/50 superposition from |0⟩ — someone accidentally left an extra X gate in it.",
+    "challenges": [
+      {
+        "challenge_id": "ch7-q1",
+        "type": "debugging",
+        "difficulty": "medium",
+        "prompt": "This circuit is broken: X, X, H. Fix it so it produces a clean 50/50 superposition.",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [
+            { "states": ["0"], "min_sum": 0.4 },
+            { "states": ["1"], "min_sum": 0.4 }
+          ]
+        },
+        "xp_reward": 40
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch8",
+    "chapter": 8,
+    "title": "Two Qubits — Working Together",
+    "explanation": "Two independent qubits can each be set separately — no connection between them yet.",
+    "challenges": [
+      {
+        "challenge_id": "ch8-q1",
+        "type": "circuit_building",
+        "difficulty": "medium",
+        "prompt": "Make both qubits become 1 (two independent qubits, no connection between them).",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [{ "states": ["11"], "min_sum": 0.95 }]
+        },
+        "xp_reward": 40
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch9",
+    "chapter": 9,
+    "title": "The CNOT Gate",
+    "explanation": "CNOT is a controlled gate — the target qubit flips only when the control qubit is 1.",
+    "challenges": [
+      {
+        "challenge_id": "ch9-q1",
+        "type": "circuit_building",
+        "difficulty": "medium",
+        "prompt": "Set qubit 0 to 1, then use CNOT (control = qubit 0, target = qubit 1) so qubit 1 flips too.",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [{ "states": ["11"], "min_sum": 0.95 }]
+        },
+        "xp_reward": 50
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch10",
+    "chapter": 10,
+    "title": "Creating Entanglement",
+    "explanation": "Entangling two qubits with H + CNOT produces strongly correlated results: mostly 00 and 11.",
+    "challenges": [
+      {
+        "challenge_id": "ch10-q1",
+        "type": "circuit_building",
+        "difficulty": "hard",
+        "prompt": "Build a Bell state: two qubits that produce mainly 00 and 11.",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [
+            { "states": ["00", "11"], "min_sum": 0.8 },
+            { "states": ["01", "10"], "max_sum": 0.2 }
+          ]
+        },
+        "xp_reward": 75
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch11",
+    "chapter": 11,
+    "title": "Exploring Different Entangled States",
+    "explanation": "Not all entangled states look the same. This time, build one that produces mainly 01 and 10 instead of 00 and 11.",
+    "challenges": [
+      {
+        "challenge_id": "ch11-q1",
+        "type": "circuit_building",
+        "difficulty": "hard",
+        "prompt": "Build a circuit where the two qubits produce mainly 01 and 10 (opposite values, strongly correlated).",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [
+            { "states": ["01", "10"], "min_sum": 0.8 },
+            { "states": ["00", "11"], "max_sum": 0.2 }
+          ]
+        },
+        "xp_reward": 75
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch12",
+    "chapter": 12,
+    "title": "Interference — Making Probabilities Change",
+    "explanation": "Phase (from the Z gate) doesn't show up directly in a measurement, but it can combine with later gates to force a specific outcome — this is interference.",
+    "challenges": [
+      {
+        "challenge_id": "ch12-q1",
+        "type": "prediction",
+        "difficulty": "hard",
+        "prompt": "Apply H, Z, H, Z to |0⟩, in that order. What will you measure?",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [{ "states": ["1"], "min_sum": 0.95 }]
+        },
+        "xp_reward": 50
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch13",
+    "chapter": 13,
+    "title": "Your First Real Quantum Algorithm — The Quantum Detective",
+    "explanation": "A mystery function takes 0 or 1 and gives back an answer. Your job: figure out if it's constant (same output both times) or balanced (different outputs).",
+    "challenges": [
+      {
+        "challenge_id": "ch13-q1",
+        "type": "multiple_choice",
+        "difficulty": "medium",
+        "prompt": "f(0) = 1 and f(1) = 1. Is this function constant or balanced?",
+        "options": ["Constant", "Balanced"],
+        "grading_method": "answer",
+        "expected_answer": "Constant",
+        "xp_reward": 40
+      },
+      {
+        "challenge_id": "ch13-q2",
+        "type": "multiple_choice",
+        "difficulty": "medium",
+        "prompt": "f(0) = 0 and f(1) = 1. Is this function constant or balanced?",
+        "options": ["Constant", "Balanced"],
+        "grading_method": "answer",
+        "expected_answer": "Balanced",
+        "xp_reward": 40
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch14",
+    "chapter": 14,
+    "title": "Mixing Everything You Learned",
+    "explanation": "Combine gates across two qubits: lock one qubit to a definite value while the other stays in superposition.",
+    "challenges": [
+      {
+        "challenge_id": "ch14-q1",
+        "type": "circuit_building",
+        "difficulty": "hard",
+        "prompt": "Make qubit 0 definitely 1, while qubit 1 stays in a 50/50 superposition.",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [
+            { "states": ["10", "11"], "min_sum": 0.95 },
+            { "states": ["00", "01"], "max_sum": 0.05 }
+          ]
+        },
+        "xp_reward": 60
+      }
+    ]
+  },
+  {
+    "lesson_id": "ch15",
+    "chapter": 15,
+    "title": "Free Practice & Creative Mode",
+    "explanation": "Open sandbox — build any circuit you like with X, H, Z, and CNOT, and see what happens. No grading here, just experimenting. Ask Bloch if you want ideas.",
+    "challenges": []
+  },
+  {
+    "lesson_id": "ch16",
+    "chapter": 16,
+    "title": "Final Chapter — Quantum Architect (Boss Project)",
+    "explanation": "Design a complete two-qubit circuit from scratch with minimal hints. Prove you understand gates, superposition, and entanglement together.",
+    "challenges": [
+      {
+        "challenge_id": "ch16-q1",
+        "type": "boss_challenge",
+        "difficulty": "boss",
+        "prompt": "Build a circuit where the two qubits produce mainly 01 and 10 (opposite, strongly correlated) — no step-by-step guidance this time.",
+        "grading_method": "result",
+        "grading_rules": {
+          "accept": [
+            { "states": ["01", "10"], "min_sum": 0.8 },
+            { "states": ["00", "11"], "max_sum": 0.2 }
+          ]
+        },
+        "xp_reward": 150
+      }
+    ]
+  }
+]
