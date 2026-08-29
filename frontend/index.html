@@ -487,6 +487,19 @@ async function loadLessons(){
     const data = await res.json();
     lessonsCache = data;
     grid.innerHTML = "";
+    let pathEl = document.getElementById("progressPath");
+    if (!pathEl) {
+      pathEl = document.createElement("div");
+      pathEl.id = "progressPath";
+      pathEl.className = "progress-path";
+      grid.parentNode.insertBefore(pathEl, grid);
+    }
+    pathEl.innerHTML = data.map((l, i) => {
+      const cls = i === 0 ? "current" : "";
+      const node = "<div class=\"progress-node " + cls + "\">" + l.chapter + "</div>";
+      const line = i < data.length - 1 ? "<div class=\"progress-line\"></div>" : "";
+      return node + line;
+    }).join("");
 
     const pathEl = document.getElementById("progressPath");
     if (pathEl) {
