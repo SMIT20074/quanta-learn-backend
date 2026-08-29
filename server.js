@@ -10,7 +10,7 @@ const authRoutes = require("./routes/auth");
 const blochRoutes = require("./routes/bloch");
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: 'https://smit20074.github.io' }));
 app.use(express.json());
 
 app.get("/", (req, res) => res.json({ status: "Quanta Learn backend running" }));
