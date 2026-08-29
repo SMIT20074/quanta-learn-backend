@@ -1,85 +1,156 @@
-:root {
-  --bg: #0d0d10;
-  --bg-card: #1a1a1f;
-  --accent: #f5c518;
-  --accent-dark: #d4a90f;
-  --text: #f0f0f0;
-  --text-dim: #a0a0a8;
-  --border: #2a2a30;
-  --purple: #7c5cff;
+/* ============================================================
+   Quanta Learn — boot.dev-style theme override
+   Loaded after the inline <style> block, so these rules win.
+   ============================================================ */
+
+:root{
+  /* boot.dev-inspired palette: deep navy + gold accent */
+  --bg:            #0B0F1E;
+  --bg-elev:       #121729;
+  --bg-elev-2:     #1A2036;
+  --text:          #F1F3FA;
+  --text-dim:      #9AA3BD;
+  --text-faint:    #5C6480;
+  --border:        #262C45;
+
+  --gold:          #F7C948;
+  --gold-dim:      #B08A2E;
+  --violet:        #7C5CFF;   /* kept for Bloch widget */
+  --cyan:          #4DE8E0;
+  --danger:        #FF6B6B;
 }
 
-* { box-sizing: border-box; }
-
-body {
-  background: var(--bg) !important;
-  color: var(--text) !important;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif !important;
+body{
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(247,201,72,0.06), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 0%, rgba(124,92,255,0.07), transparent 60%),
+    var(--bg);
 }
 
-/* Header/nav: plain text, no button styling, regardless of tag/class used */
-header, nav, [class*="nav"], [class*="header"] {
-  background: var(--bg) !important;
-  border-bottom: 1px solid var(--border) !important;
+/* ---------- topbar ---------- */
+.topbar{ background:rgba(11,15,30,0.9); border-bottom:1px solid var(--border); }
+.brand-mark{ background:conic-gradient(var(--gold) 0deg 180deg, var(--violet) 180deg 360deg); }
+.nav-btn.active{ background:var(--bg-elev-2); color:var(--gold); }
+.nav-btn:hover{ color:var(--text); }
+.xp-pill{ color:var(--gold); border-color:var(--border); }
+.pill-dot{ background:var(--gold); }
+
+/* primary CTAs go gold, like boot.dev's "Continue Learning" button */
+.btn-primary{
+  background:var(--gold); color:#151221; font-weight:700;
+}
+.btn-primary:hover{ background:#FFDA75; transform:translateY(-1px); }
+.btn-ghost:hover{ border-color:var(--gold-dim); }
+
+/* ---------- hero ---------- */
+.eyebrow{ color:var(--gold); }
+.hero h1 em{ color:var(--gold); }
+.coin{
+  background:conic-gradient(var(--gold) 0deg 180deg, var(--violet) 180deg 360deg);
+  box-shadow:0 0 60px -10px rgba(247,201,72,.45);
+}
+.stat b{ color:var(--text); }
+.stat-row{ border-color:var(--border); }
+
+/* ---------- learning-loop strip ---------- */
+.loop-step{ background:var(--bg-elev); border-color:var(--border); }
+
+/* ============================================================
+   PROGRESS PATH — the boot.dev node map
+   (was referenced by JS with zero CSS before — now fully styled)
+   ============================================================ */
+.progress-path{
+  display:flex; align-items:center; overflow-x:auto;
+  padding:28px 8px 36px; margin-bottom:8px; gap:0;
+}
+.progress-node{
+  flex-shrink:0;
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-mono); font-weight:700; font-size:14px;
+  background:var(--bg-elev-2); color:var(--text-faint);
+  border:2px solid var(--border);
+  position:relative; z-index:2;
+  transition:all .15s;
+}
+.progress-node.current{
+  background:var(--gold); color:#151221; border-color:var(--gold);
+  box-shadow:0 0 0 4px rgba(247,201,72,.18);
+}
+.progress-node.done{
+  background:transparent; color:var(--cyan); border-color:var(--cyan);
+}
+.progress-line{
+  flex:0 0 40px; height:3px; background:var(--border); z-index:1;
+}
+.progress-node.done + .progress-line{ background:var(--cyan); opacity:.5; }
+
+@media (max-width:640px){
+  .progress-node{ width:38px; height:38px; font-size:12px; }
+  .progress-line{ flex-basis:24px; }
 }
 
-header *, nav *, [class*="nav"] *, [class*="header"] * {
-  background: transparent !important;
-  box-shadow: none !important;
-  color: var(--text-dim) !important;
-  font-weight: 600 !important;
+/* ============================================================
+   LESSON CARDS — boot.dev chapter-card look
+   (circular index badge, gold progress bar, hover lift)
+   ============================================================ */
+.lesson-card{
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  padding:22px 20px 18px;
 }
-
-header *:hover, nav *:hover, [class*="nav"] *:hover, [class*="header"] *:hover {
-  color: var(--accent) !important;
+.lesson-card:not(.locked):hover{
+  border-color:var(--gold-dim);
+  box-shadow:0 8px 24px -8px rgba(247,201,72,.15);
 }
+.lesson-card.done{ border-color:rgba(77,232,224,.35); }
 
-h1, h2, h3 {
-  font-weight: 800 !important;
-  letter-spacing: -0.02em !important;
-  color: var(--text) !important;
+.lesson-num{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:26px; height:26px; border-radius:50%;
+  background:var(--bg-elev-2); border:1px solid var(--border);
+  color:var(--text-dim); font-size:11px; margin-bottom:12px;
 }
+.lesson-card h3{ margin-bottom:10px; }
 
-/* Real action buttons ONLY - outside header/nav */
-body > *:not(header):not(nav) button,
-body > *:not(header):not(nav) .btn,
-body > *:not(header):not(nav) [class*="submit"] {
-  background: var(--accent) !important;
-  color: #1a1a1f !important;
-  border: none !important;
-  border-radius: 12px !important;
-  padding: 14px 28px !important;
-  font-weight: 800 !important;
-  font-size: 15px !important;
-  box-shadow: 0 4px 0 var(--accent-dark) !important;
-  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+.lesson-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:14px; padding-top:12px; border-top:1px solid var(--border);
 }
+.done-badge{ color:var(--cyan); }
 
-body > *:not(header):not(nav) button:hover,
-body > *:not(header):not(nav) .btn:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 0 var(--accent-dark) !important;
+/* ---------- auth ---------- */
+.auth-wrap{ background:var(--bg-elev); border-color:var(--border); }
+.field input:focus{ border-color:var(--gold); }
+.auth-toggle button.active{ background:var(--bg-elev-2); color:var(--gold); }
+.msg.ok{ background:rgba(247,201,72,.1); color:var(--gold); border-color:rgba(247,201,72,.3); }
+
+/* ---------- circuit builder ---------- */
+.gate-btn:hover{ border-color:var(--gold); color:var(--gold); }
+.op-chip{ background:var(--bg-elev-2); border-color:var(--border); }
+.mc-opt.selected{ border-color:var(--gold); background:rgba(247,201,72,.08); }
+
+.prob-bar-fill{ background:linear-gradient(90deg,var(--gold),#FFE9A8); }
+.chal-tag{ color:var(--gold); }
+
+.grade-banner.pass{ background:rgba(247,201,72,.1); border-color:rgba(247,201,72,.3); color:var(--gold); }
+
+/* ============================================================
+   PROGRESS PAGE — big gold XP counter + gold bar, boot.dev style
+   ============================================================ */
+.progress-card{ background:var(--bg-elev); border-color:var(--border); }
+.progress-top b{ color:var(--gold); }
+.bar-fill{ background:linear-gradient(90deg,var(--gold),#FFE9A8); }
+.completed-chip{ background:rgba(247,201,72,.1); border-color:rgba(247,201,72,.3); color:var(--gold); }
+
+/* ---------- Bloch widget stays violet — the tutor's own identity ---------- */
+.bloch-btn{ box-shadow:0 8px 24px -4px rgba(124,92,255,.5); }
+
+/* ---------- mascot bubble tidy-up ---------- */
+.mascot-widget{ position:fixed; left:24px; bottom:24px; z-index:55; text-align:center; }
+.mascot-bubble{
+  display:none; position:absolute; bottom:64px; left:50%; transform:translateX(-50%);
+  width:200px; background:var(--bg-elev-2); border:1px solid var(--border);
+  border-radius:10px; padding:10px 12px; font-size:12px; color:var(--text-dim);
 }
-
-[class*="card"], [class*="lesson"], [class*="question"] {
-  background: var(--bg-card) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 16px !important;
-  padding: 24px !important;
-}
-
-[class*="option"] {
-  background: var(--bg-card) !important;
-  border: 2px solid var(--border) !important;
-  border-radius: 10px !important;
-  color: var(--text) !important;
-}
-
-[class*="option"]:hover { border-color: var(--accent) !important; }
-
-[class*="xp"], [class*="badge"] {
-  background: var(--accent) !important;
-  color: #1a1a1f !important;
-  font-weight: 800 !important;
-  border-radius: 999px !important;
-}
+.mascot-widget:hover .mascot-bubble{ display:block; }
