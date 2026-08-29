@@ -501,16 +501,6 @@ async function loadLessons(){
       return node + line;
     }).join("");
 
-    const pathEl = document.getElementById("progressPath");
-    if (pathEl) {
-      pathEl.innerHTML = data.map((l, i) => {
-        const nodeClass = i === 0 ? "current" : "";
-        const node = `<div class="progress-node ${nodeClass}">${l.chapter}</div>`;
-        const line = i < data.length - 1 ? '<div class="progress-line"></div>' : '';
-        return node + line;
-      }).join("");
-    }
-
     data.forEach((l, i) => {
       const card = document.createElement("button");
       card.className = "lesson-card";
