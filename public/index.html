@@ -343,6 +343,7 @@ main{max-width:1080px; margin:0 auto; padding:0 24px 80px;}
   <section class="view" id="view-lessons">
     <div class="section-title">Learning map</div>
     <div class="section-sub">Pick a chapter. Locked chapters unlock as you go.</div>
+    <div class="progress-path" id="progressPath"></div>
     <div class="lesson-grid" id="lessonGrid">
       <div class="center-note">Loading lessons…</div>
     </div>
@@ -486,6 +487,17 @@ async function loadLessons(){
     const data = await res.json();
     lessonsCache = data;
     grid.innerHTML = "";
+
+    const pathEl = document.getElementById("progressPath");
+    if (pathEl) {
+      pathEl.innerHTML = data.map((l, i) => {
+        const nodeClass = i === 0 ? "current" : "";
+        const node = `<div class="progress-node ${nodeClass}">${l.chapter}</div>`;
+        const line = i < data.length - 1 ? '<div class="progress-line"></div>' : '';
+        return node + line;
+      }).join("");
+    }
+
     data.forEach((l, i) => {
       const card = document.createElement("button");
       card.className = "lesson-card";
