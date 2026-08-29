@@ -38,7 +38,7 @@ h1, h2, h3 {
 }
 
 /* Gold accent buttons instead of purple */
-button, .btn, [class*="submit"], [class*="button"] {
+button:not(nav button):not(header button), .btn:not(nav .btn):not(header .btn), [class*="submit"], [class*="button"]:not(nav *):not(header *) {
   background: var(--accent) !important;
   color: #1a1a1f !important;
   border: none !important;
@@ -202,4 +202,21 @@ button:active, .btn:active {
   height: 100%;
   background: var(--accent);
   border-radius: 999px;
+}
+
+
+/* Nav links stay plain text, not buttons */
+nav button, header button, nav .btn, header .btn, nav [class*="button"], header [class*="button"] {
+  background: transparent !important;
+  color: var(--text-dim) !important;
+  box-shadow: none !important;
+  padding: 8px 12px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+}
+
+nav button:hover, header button:hover, nav .btn:hover, header .btn:hover {
+  color: var(--accent) !important;
+  background: var(--bg-card) !important;
+  transform: none !important;
 }
