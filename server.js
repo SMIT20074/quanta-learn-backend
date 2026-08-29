@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const { initSchema } = require("./lib/db");
@@ -10,16 +11,19 @@ const authRoutes = require("./routes/auth");
 const blochRoutes = require("./routes/bloch");
 
 const app = express();
-app.use(cors({ origin: 'https://smit20074.github.io' }));
+app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => res.json({ status: "Quanta Learn backend running" }));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));
+app.get("/api/status", (req, res) => res.json({ status: "Quanta Learn backend running" }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/circuit", circuitRoutes);
 app.use("/api/lessons", lessonRoutes);
 app.use("/api/bloch", blochRoutes);
-app.use("/api", progressRoutes); // /api/challenges/:id/submit, /api/users/me/progress
+app.use("/api", progressRoutes);
 
 const PORT = process.env.PORT || 3001;
 
