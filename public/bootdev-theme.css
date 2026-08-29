@@ -7,9 +7,9 @@
   --text-dim: #a0a0a8;
   --border: #2a2a30;
   --purple: #7c5cff;
-  --green: #3ecf8e;
-  --red: #ff5c5c;
 }
+
+* { box-sizing: border-box; }
 
 body {
   background: var(--bg) !important;
@@ -17,17 +17,20 @@ body {
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif !important;
 }
 
-nav, header {
+/* Header/nav: plain text, no button styling, regardless of tag/class used */
+header, nav, [class*="nav"], [class*="header"] {
   background: var(--bg) !important;
   border-bottom: 1px solid var(--border) !important;
 }
 
-nav a, header a {
+header *, nav *, [class*="nav"] *, [class*="header"] * {
+  background: transparent !important;
+  box-shadow: none !important;
   color: var(--text-dim) !important;
   font-weight: 600 !important;
 }
 
-nav a:hover, header a:hover {
+header *:hover, nav *:hover, [class*="nav"] *:hover, [class*="header"] *:hover {
   color: var(--accent) !important;
 }
 
@@ -37,8 +40,10 @@ h1, h2, h3 {
   color: var(--text) !important;
 }
 
-/* Gold accent buttons instead of purple */
-button:not(nav button):not(header button), .btn:not(nav .btn):not(header .btn), [class*="submit"], [class*="button"]:not(nav *):not(header *) {
+/* Real action buttons ONLY - outside header/nav */
+body > *:not(header):not(nav) button,
+body > *:not(header):not(nav) .btn,
+body > *:not(header):not(nav) [class*="submit"] {
   background: var(--accent) !important;
   color: #1a1a1f !important;
   border: none !important;
@@ -46,18 +51,14 @@ button:not(nav button):not(header button), .btn:not(nav .btn):not(header .btn), 
   padding: 14px 28px !important;
   font-weight: 800 !important;
   font-size: 15px !important;
-  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
   box-shadow: 0 4px 0 var(--accent-dark) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
 }
 
-button:hover, .btn:hover {
+body > *:not(header):not(nav) button:hover,
+body > *:not(header):not(nav) .btn:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 6px 0 var(--accent-dark) !important;
-}
-
-button:active, .btn:active {
-  transform: translateY(2px) !important;
-  box-shadow: 0 2px 0 var(--accent-dark) !important;
 }
 
 [class*="card"], [class*="lesson"], [class*="question"] {
@@ -67,156 +68,18 @@ button:active, .btn:active {
   padding: 24px !important;
 }
 
-[class*="option"], label:has(input[type="radio"]) {
+[class*="option"] {
   background: var(--bg-card) !important;
   border: 2px solid var(--border) !important;
   border-radius: 10px !important;
   color: var(--text) !important;
-  transition: border-color 0.15s ease !important;
 }
 
-[class*="option"]:hover {
-  border-color: var(--accent) !important;
-}
+[class*="option"]:hover { border-color: var(--accent) !important; }
 
 [class*="xp"], [class*="badge"] {
   background: var(--accent) !important;
   color: #1a1a1f !important;
   font-weight: 800 !important;
   border-radius: 999px !important;
-}
-
-::selection {
-  background: var(--accent) !important;
-  color: #000 !important;
-}
-
-/* --- Mascot --- */
-.mascot-widget {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  display: flex;
-  align-items: flex-end;
-  gap: 12px;
-  z-index: 500;
-  max-width: 320px;
-}
-
-.mascot-widget img {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  border: 3px solid var(--accent);
-  background: var(--bg-card);
-  flex-shrink: 0;
-}
-
-.mascot-bubble {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 12px 16px;
-  font-size: 14px;
-  color: var(--text);
-}
-
-/* --- Progress path with numbered circles --- */
-.progress-path {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 24px;
-  overflow-x: auto;
-}
-
-.progress-node {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 15px;
-  flex-shrink: 0;
-  background: var(--bg-card);
-  border: 2px solid var(--border);
-  color: var(--text-dim);
-}
-
-.progress-node.done {
-  background: var(--accent);
-  border-color: var(--accent-dark);
-  color: #1a1a1f;
-}
-
-.progress-node.current {
-  background: var(--purple);
-  border-color: #5c3fd9;
-  color: #fff;
-  transform: scale(1.15);
-}
-
-.progress-line {
-  height: 4px;
-  width: 32px;
-  background: var(--border);
-  flex-shrink: 0;
-}
-
-.progress-line.done {
-  background: var(--accent);
-}
-
-/* --- Chapter list with progress bars --- */
-.chapter-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-  padding: 16px 24px;
-}
-
-.chapter-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
-}
-
-.chapter-card-title {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.chapter-progress-bar {
-  height: 6px;
-  background: var(--border);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.chapter-progress-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 999px;
-}
-
-
-/* Nav links stay plain text, not buttons */
-nav button, header button, nav .btn, header .btn, nav [class*="button"], header [class*="button"] {
-  background: transparent !important;
-  color: var(--text-dim) !important;
-  box-shadow: none !important;
-  padding: 8px 12px !important;
-  font-weight: 600 !important;
-  border-radius: 8px !important;
-}
-
-nav button:hover, header button:hover, nav .btn:hover, header .btn:hover {
-  color: var(--accent) !important;
-  background: var(--bg-card) !important;
-  transform: none !important;
 }
